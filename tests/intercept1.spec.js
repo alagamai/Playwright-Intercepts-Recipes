@@ -37,6 +37,8 @@ test('Intercept by modifying response using req.fulfill method', async ({
 					},
 				],
 			}),
+			status: 400, // Manually specifying status code
+			headers: { 'Content-Type': 'application/json' }, // Manually specifying headers
 		});
 		//route.continue(); // Allow other requests to continue unchanged
 	});
@@ -50,6 +52,8 @@ test('Intercept by modifying response using req.fulfill method', async ({
 	// expect(response.status()).toBe(200);
 	expect(responseBody.data).toHaveLength(2);
 	console.log(responseBody.data[0]);
+	console.log(`Response headers : ${JSON.stringify(response.headers())}`);
+	console.log(`Response status ${response.status()}`);
 });
 
 test('Stubbing a response with a fixture file', async ({ page }) => {
